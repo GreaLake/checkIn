@@ -1,0 +1,49 @@
+# 应用配置
+spring:
+  application:
+    name: checkin-backend
+  
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql:3306/checkin_db?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: checkin_user
+    password: checkin_pass
+
+# MyBatis Plus配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# 服务器配置
+server:
+  port: 7778
+  servlet:
+    context-path: /api
+
+# JWT配置
+jwt:
+  secret: checkin-system-jwt-secret-key-2023
+  expiration: 86400000 # 24小时
+
+# 日志配置
+logging:
+  level:
+    com.checkin: DEBUG
+    org.springframework.security: DEBUG
+
+# 健康检查配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always

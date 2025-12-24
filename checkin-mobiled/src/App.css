@@ -1,0 +1,282 @@
+.App {
+  text-align: center;
+}
+
+.page-container {
+  padding: 16px;
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.header {
+  background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+  color: white;
+  padding: 20px 16px;
+  border-radius: 0 0 16px 16px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.header p {
+  margin: 8px 0 0 0;
+  opacity: 0.9;
+  font-size: 14px;
+}
+
+.bottom-nav {
+  position: fixed;
+  width: 100%;
+  background: white;
+  border-top: 1px solid #e8e8e8;
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 60px;
+}
+
+.nav-item {
+  flex: 1;
+  padding: 12px 8px;
+  text-align: center;
+  color: #666;
+  text-decoration: none;
+  font-size: 12px;
+  transition: color 0.3s;
+}
+
+.nav-item.active {
+  color: #1890ff;
+}
+
+.nav-item:hover {
+  color: #1890ff;
+}
+
+.nav-icon {
+  font-size: 20px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.main-content {
+  padding-bottom: 80px;
+}
+
+/* 状态卡片样式 */
+.status-card {
+  border-radius: 16px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+  overflow: hidden !important;
+}
+
+.status-card .ant-card-body {
+  padding: 20px !important;
+}
+
+/* 签到卡片样式 */
+.checkin-card {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid #f0f0f0 !important;
+}
+
+.checkin-card .ant-card-head {
+  border-bottom: 1px solid #f0f0f0 !important;
+  padding: 16px 20px !important;
+}
+
+.checkin-card .ant-card-head-title {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  color: #262626 !important;
+}
+
+.checkin-card .ant-card-body {
+  padding: 20px !important;
+}
+
+/* 快捷操作卡片样式 */
+.quick-actions-card {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid #f0f0f0 !important;
+}
+
+.quick-actions-card .ant-card-body {
+  padding: 16px !important;
+}
+
+.quick-actions-card .ant-btn {
+  border-radius: 8px !important;
+  font-size: 16px !important;
+  height: 60px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: column !important;
+}
+
+.quick-actions-card .ant-btn .anticon {
+  font-size: 20px !important;
+  margin-bottom: 4px !important;
+}
+
+/* 表单样式增强 */
+.checkin-card .ant-form-item-label > label {
+  font-weight: 500 !important;
+  color: #595959 !important;
+}
+
+.checkin-card .ant-input-affix-wrapper,
+.checkin-card .ant-select-selector {
+  border-radius: 8px !important;
+  border: 1px solid #d9d9d9 !important;
+  transition: all 0.3s ease !important;
+}
+
+.checkin-card .ant-input-affix-wrapper:hover,
+.checkin-card .ant-select-selector:hover {
+  border-color: #40a9ff !important;
+}
+
+.checkin-card .ant-input-affix-wrapper:focus,
+.checkin-card .ant-input-affix-wrapper-focused,
+.checkin-card .ant-select-focused .ant-select-selector {
+  border-color: #1890ff !important;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2) !important;
+}
+
+/* 按钮样式增强 */
+.checkin-card .ant-btn-primary {
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease !important;
+}
+
+.checkin-card .ant-btn-primary:hover {
+  background: linear-gradient(135deg, #40a9ff 0%, #1890ff 100%) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3) !important;
+}
+
+.checkin-card .ant-btn-dangerous {
+  background: linear-gradient(135deg, #ff4d4f 0%, #ff7875 100%) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease !important;
+}
+
+.checkin-card .ant-btn-dangerous:hover {
+  background: linear-gradient(135deg, #ff7875 0%, #ff4d4f 100%) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(255, 77, 79, 0.3) !important;
+}
+
+/* 选择器选项样式 */
+.ant-select-item {
+  padding: 8px 12px !important;
+}
+
+.ant-select-item-option-content {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* 标签样式 */
+.ant-tag {
+  border-radius: 4px !important;
+  font-weight: 500 !important;
+}
+
+/* 进度条样式 */
+.ant-progress-bg {
+  border-radius: 4px !important;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .status-card .ant-card-body {
+    padding: 16px !important;
+  }
+  
+  .checkin-card .ant-card-body {
+    padding: 16px !important;
+  }
+  
+  .quick-actions-card .ant-btn {
+    height: 50px !important;
+    font-size: 14px !important;
+  }
+  
+  .quick-actions-card .ant-btn .anticon {
+    font-size: 18px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .status-card .ant-col {
+    text-align: center !important;
+  }
+  
+  .status-card .ant-col:last-child {
+    margin-top: 12px !important;
+  }
+  
+  .quick-actions-card .ant-btn {
+    height: 45px !important;
+    font-size: 13px !important;
+  }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.checkin-card,
+.status-card,
+.quick-actions-card {
+  animation: fadeIn 0.6s ease-out !important;
+}
+
+/* 底部导航增强 */
+.bottom-nav .nav-item {
+  transition: all 0.3s ease !important;
+}
+
+.bottom-nav .nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.bottom-nav .nav-item.active {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.bottom-nav .nav-icon {
+  transition: transform 0.3s ease !important;
+}
+
+.bottom-nav .nav-item:hover .nav-icon {
+  transform: scale(1.1) !important;
+}
+
+.bottom-nav .nav-item.active .nav-icon {
+  transform: scale(1.2) !important;
+}

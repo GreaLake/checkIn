@@ -1,0 +1,99 @@
+services:
+  # MySQL数据库服务
+  mysql:
+    image: mysql:5.7
+    platform: linux/amd64
+    container_name: checkin-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: checkin_db
+      MYSQL_USER: checkin_user
+      MYSQL_PASSWORD: checkin_pass
+      TZ: Asia/Shanghai
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - checkin-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+      interval: 30s
+    command: --default-authentication-plugin=mysql_native_password
+
+  # Redis缓存服务
+  redis:
+    image: redis:6-alpine
+    container_name: checkin-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - checkin-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      timeout: 3s
+      retries: 3
+      interval: 30s
+
+  # 后端服务
+  backend:
+    build:
+      context: ./checkin-backend
+      dockerfile: Dockerfile
+    container_name: checkin-backend
+    restart: unless-stopped
+    ports:
+      - "7778:7778"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/checkin_db?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+      SPRING_DATASOURCE_USERNAME: checkin_user
+      SPRING_DATASOURCE_PASSWORD: checkin_pass
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+      JAVA_OPTS: -Xms512m -Xmx2g -XX:+UseG1GC
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - checkin-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7778/api/health"]
+      timeout: 10s
+      retries: 5
+      interval: 30s
+      start_period: 60s
+
+  # 前端服务
+  frontend:
+    build:
+      context: ./checkin-mobiled
+      dockerfile: Dockerfile
+    container_name: checkin-frontend
+    restart: unless-stopped
+    ports:
+      - "7779:80"
+    depends_on:
+      - backend
+    networks:
+      - checkin-network
+
+# 数据卷定义
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
+
+# 网络定义
+networks:
+  checkin-network:
+    driver: bridge
